@@ -9,5 +9,9 @@ USER = 'BonzoESC'
 
 c = Twitter::Client.new
 
-s = c.timeline_for :user, :id=>USER, :since=>SINCE
+statuses = c.timeline_for :user, :id=>USER, :since=>SINCE
 
+template = File.read('output.atom.erb')
+erb = Erubis::Eruby.new(template)
+
+$stdout.write erb.result(binding())
