@@ -40,12 +40,14 @@ atom.feed(:'xml:lang'=>LANG, :xmlns=>'http://www.w3.org/2005/Atom') { |f|
 		a.uri "http://twitter.com/#{USER}"
 	}
 	f.updated statuses.first.created_at.strftime('%Y-%m-%dT%H:%M:%SZ')
-	f.entry { |e|
-		e.title "Updates since #{SINCE}"
-		e.updated statuses.first.created_at.strftime('%Y-%m-%dT%H:%M:%SZ')
-		e.id "http://twitter.com/#{USER}/statuses/#{statuses.first.id}"
-		e.content(content.target!, :type=>'html')
-	}
+	if (statuses.length > 0)
+		f.entry { |e|
+			e.title "Twitter since #{SINCE.strftime('%Y-%m-%d')}"
+			e.updated statuses.first.created_at.strftime('%Y-%m-%dT%H:%M:%SZ')
+			e.id "http://twitter.com/#{USER}/statuses/#{statuses.first.id}"
+			e.content(content.target!, :type=>'html')
+		}
+	end
 }
 
 puts atom.target!
