@@ -1,4 +1,3 @@
-# http://twitter.com/statuses/user_timeline/bonzoesc.atom
 require 'rubygems'
 require 'twitter'
 require 'active_support'
@@ -17,12 +16,12 @@ content = Builder::XmlMarkup.new :indent=>2, :out=>content_collector
 content.div(:class=>'twitter') { |d|
 	statuses.reverse.each { |status|
 		d.p { |p|
-			p.span(:class=>'user') { |s|
-				s.img :src=>status.user.profile_image_url
-				s.span status.user.name, :class=>'username'
-			}
-			p.span "at #{status.created_at.strftime("%H:%M:%S")}: ", :class=>'timestamp'
-			p.span status.text
+			# p.span(:class=>'user') { |s|
+			# 				s.img :src=>status.user.profile_image_url
+			# 				s.span status.user.name, :class=>'username'
+			# 			}
+			p.span "At #{status.created_at.strftime("%H:%M:%S")}: ", :class=>'timestamp'
+			p.span status.text, :class=>'content'
 		}
 	}
 }
