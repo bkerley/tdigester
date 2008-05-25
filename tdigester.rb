@@ -2,6 +2,7 @@
 require 'rubygems'
 require 'twitter'
 require 'active_support'
+require 'erubis'
 
 SINCE = 24.hours.ago
 USER = 'BonzoESC'
@@ -9,3 +10,4 @@ USER = 'BonzoESC'
 c = Twitter::Client.new
 
 s = c.timeline_for :user, :id=>USER, :since=>SINCE
+
